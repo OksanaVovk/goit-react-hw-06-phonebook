@@ -11,10 +11,8 @@ const items = createReducer([], {
   [remove]: (state, action) => state.filter(({ id }) => id !== action.payload),
 });
 
-console.log(items);
-
 const filter = createReducer('', {
-  [changeFilter]: action => action.payload,
+  [changeFilter]: (_, action) => action.payload,
 });
 
 const contactsReducer = {
@@ -25,5 +23,5 @@ const contactsReducer = {
 console.log(contactsReducer);
 
 export const store = configureStore({
-  reducer: { items: items },
+  reducer: { items: items, filter: filter },
 });

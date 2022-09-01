@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { add, remove } from '../redux/store';
+import { add, remove, changeFilter } from '../redux/store';
 import ContactForm from './ContactForm';
 import Filter from './Filter';
 import ContactList from './ContactList';
@@ -12,7 +12,9 @@ const LS_Key = 'contacts_hook';
 
 export default function App() {
   const valueItems = useSelector(state => state.items);
+  const valueFilter = useSelector(state => state.filter);
   console.log(valueItems);
+  console.log(valueFilter);
   const dispatch = useDispatch();
 
   // const [contacts, setContacts] = useState(
@@ -20,7 +22,7 @@ export default function App() {
   //     ? JSON.parse(window.localStorage.getItem(LS_Key))
   //     : []
   // );
-  const [filter, setFilter] = useState('');
+  // const [filter, setFilter] = useState('');
 
   let filtId = nanoid();
 
@@ -29,8 +31,9 @@ export default function App() {
   // }, [contacts]);
 
   const handleFilterChange = event => {
-    return setFilter(event.currentTarget.value);
-    // return dispatch(changeFilter(event.currentTarget.value));
+    // setFilter(event.currentTarget.value);
+    dispatch(changeFilter(event.currentTarget.value));
+    // const value = event.currentTarget.value;
   };
 
   // const onFormSubmit = data => {
@@ -51,7 +54,7 @@ export default function App() {
   };
 
   const getVisiableContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
+    const normalizedFilter = valueFilter.toLowerCase();
     return valueItems.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
@@ -72,7 +75,7 @@ export default function App() {
       <h1>Phonebook</h1>
       <ContactForm onSubmit={onFormSubmit} />
       <h2>Contacts</h2>
-      <Filter id={filtId} value={filter} onChange={handleFilterChange} />
+      <Filter id={filtId} value={valueFilter} onChange={handleFilterChange} />
       <ContactList contactArray={visiableContacts} onDeleteCont={deleteCont} />
     </div>
   );
