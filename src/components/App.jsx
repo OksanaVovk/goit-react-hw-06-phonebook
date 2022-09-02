@@ -1,20 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { add, remove, changeFilter } from '../redux/store';
+import { add, remove, changeFilter } from '../redux/actions';
 import ContactForm from './ContactForm';
 import Filter from './Filter';
 import ContactList from './ContactList';
 import 'react-native-get-random-values';
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
-import { useEffect } from 'react';
+// import { useState } from 'react';
+// import { useEffect } from 'react';
 
-const LS_Key = 'contacts_hook';
+// const LS_Key = 'contacts_hook';
 
 export default function App() {
-  const valueItems = useSelector(state => state.items);
-  const valueFilter = useSelector(state => state.filter);
-  console.log(valueItems);
-  console.log(valueFilter);
+  const valueItems = useSelector(state => state.contacts.items);
+  const valueFilter = useSelector(state => state.contacts.filter);
+
   const dispatch = useDispatch();
 
   // const [contacts, setContacts] = useState(
