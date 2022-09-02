@@ -14,7 +14,7 @@ const filter = createReducer('', {
   [changeFilter]: (_, action) => action.payload,
 });
 
-const todosReducer = combineReducers({
+const contactsReducer = combineReducers({
   items,
   filter,
 });
@@ -27,5 +27,5 @@ const persistConfig = {
 
 export const persistedContactsReducer = persistReducer(
   persistConfig,
-  todosReducer
+  contactsReducer
 );
